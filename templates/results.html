@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Results</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h2>Scan Results</h2>
+  <table>
+    <tr><th>Source</th><th>Title / Channel</th><th>Score</th><th>Link</th><th>Report</th></tr>
+    {% for r in results %}
+    <tr>
+      <td>{{ r.source }}</td>
+      <td>{{ r.title or r.channel }}</td>
+      <td>{{ "%.2f"|format(r.score) }}</td>
+      <td><a href="{{ r.link }}" target="_blank">Open</a></td>
+      <td><a href="/report?platform={{ r.source }}&url={{ r.link }}">Report</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  <a href="/">← New Scan</a>
+</body>
+</html>

@@ -1,0 +1,8 @@
+body { font-family: Arial, sans-serif; padding: 2rem; background: #f6f8fa; color: #222; }
+h1, h2 { color: #333; }
+button { padding: 8px 16px; margin-top: 1rem; cursor: pointer; }
+iframe { width: 100%; height: 250px; border: 1px solid #ccc; background: #fff; margin-top: 1rem; }
+.hidden { display: none; }
+table { border-collapse: collapse; width: 100%; margin-top: 2rem; background: #fff; }
+th, td { border: 1px solid #ddd; padding: 8px; }
+th { background: #ececec; }

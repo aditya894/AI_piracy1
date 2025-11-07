@@ -1,0 +1,6 @@
+# Dataset config for YOLOv8
+path: D:/AI_piracy/trainandtest   # dataset root
+train: train/images               # training images
+val: test/images                  # validation images
+nc: 2341                          # number of classes
+names: [class_0, class_1, class_2, ..., class_2340]
