@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>AI Piracy Scanner</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
   <h1>AI Piracy Scanner</h1>
 
-  <!-- MULTI-LOGO UPLOAD FORM -->
   <form id="uploadForm" action="/upload_logos" method="post" enctype="multipart/form-data">
-    <p>Upload one or more logo images (PNG / JPG / JPEG):</p>
+    <p>Select one or more client logos (Conceptual Pediatrics, Conceptual Medicine, EC, etc.).</p>
     <input type="file" name="files" accept="image/*" multiple required>
     <button type="submit">Start Scan</button>
   </form>
 
   <div id="loader" class="hidden">🔎 Scanning... please wait.</div>
-
-  <!-- Live logs iframe (unchanged) -->
   <iframe id="logFrame" src="/logs"></iframe>
 
   <script src="/static/script.js"></script>

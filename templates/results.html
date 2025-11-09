@@ -1,23 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Results</title>
+  <meta charset="UTF-8">
+  <title>Scan Results</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <h2>Scan Results</h2>
-  <table>
-    <tr><th>Source</th><th>Title / Channel</th><th>Score</th><th>Link</th><th>Report</th></tr>
-    {% for r in results %}
-    <tr>
-      <td>{{ r.source }}</td>
-      <td>{{ r.title or r.channel }}</td>
-      <td>{{ "%.2f"|format(r.score) }}</td>
-      <td><a href="{{ r.link }}" target="_blank">Open</a></td>
-      <td><a href="/report?platform={{ r.source }}&url={{ r.link }}">Report</a></td>
-    </tr>
-    {% endfor %}
-  </table>
-  <a href="/">← New Scan</a>
+  <div class="container">
+    <h1>Scan Results</h1>
+    <p>Logos used: {{ ', '.join(logos) if logos else 'N/A' }}</p>
+    <p>Total items: {{ results|length }}</p>
+
+    {% if results %}
+      <table class="results">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Source</th>
+            <th>Channel</th>
+            <th>Title / Item</th>
+            <th>Logo Sim</th>
+            <th>CSV / Keyword</th>
+            <th>Matched Logo(s)</th>
+            <th>Report</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in results %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ r.source }}</td>
+            <td>{{ r.channel or '' }}</td>
+            <td>
+              <a href="{{ r.link }}" target="_blank">
+                {{ r.title or r.link }}
+              </a>
+            </td>
+            <td>{{ "%.2f"|format(r.similarity) }}</td>
+            <td>{{ "%.2f"|format(r.kw_score) }}</td>
+            <td>
+              {% if r.matched_logo is iterable and not r.matched_logo is string %}
+                {{ ', '.join(r.matched_logo) }}
+              {% else %}
+                {{ r.matched_logo or '' }}
+              {% endif %}
+            </td>
+            <td>
+              <a href="/report?platform={{ r.source }}&url={{ r.link }}" target="_blank">
+                Report
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <p style="margin-top:1rem;">
+        <a href="/download_csv" target="_blank">⬇ Download report as CSV</a>
+      </p>
+    {% else %}
+      <p>No matches found.</p>
+    {% endif %}
+
+    <p><a href="/">← Back</a></p>
+  </div>
 </body>
 </html>
